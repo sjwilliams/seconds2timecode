@@ -1,0 +1,22 @@
+{
+  "name": "seconds2timecode",
+  "version": "0.0.1",
+  "description": "Time in seconds to a formatted timecode string.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjwilliams/seconds2timecode.git"
+  },
+  "keywords": [
+    "timecode"
+  ],
+  "author": "Josh Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sjwilliams/seconds2timecode/issues"
+  },
+  "homepage": "https://github.com/sjwilliams/seconds2timecode#readme"
+}
