@@ -1,6 +1,6 @@
 {
   "name": "seconds2timecode",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Time in seconds to a formatted timecode string.",
   "main": "index.js",
   "scripts": {

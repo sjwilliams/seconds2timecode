@@ -32,24 +32,36 @@
     var minutes = Math.floor((secs - (hours * 3600)) / 60);
     var seconds = secs - (hours * 3600) - (minutes * 60);
     
-    // zero pad if unit value is less then 10
-    [hours, minutes, seconds].forEach(function(unit){
-      if (unit < 10) {
-        unit = "0"+unit;
-      }
+    var hhmmss = '';
+
+    // generated string in hhmmss format.
+    [seconds, minutes, hours].forEach(function(unit, i){
+      if (unit < 10) unit = '0'+unit;
+      hhmmss = unit + hhmmss;
     });
 
-    var formatted = hours+':'+minutes+':'+seconds;
 
-    // honor padding setting
-    var timecodeCharacters = formatted.split('').reverse();
-    var timecodeCharactersFormatted = timecodeCharacters.slice( 0, timecodeCharacters.indexOf('0') + padding );
+    // drop all the leading zeros except for the ones used for padding
+    var firstNoneZeroCharacterIndex = 0;
+    for (var i = 0; i < hhmmss.length; i++) {
+      if (hhmmss[i] != '0') {
+        firstNoneZeroCharacterIndex = i;
+        break;
+      }
+    }
+    
+    hhmmss = hhmmss.slice(firstNoneZeroCharacterIndex - (padding + (hhmmss.length)) );
 
-    // don't allow string to start with a ":"
-    if (timecodeCharactersFormatted[timecodeCharactersFormatted.length - 1] === ':') {
-      timecodeCharactersFormatted.pop();
+    // add colons in. hhmmss to hh:mm:ss
+    var formatted = '';
+    for (var k = 0, len = hhmmss.length; k < len; k++) {
+      if (k > 0 && k % 2 === 0) {
+        formatted = hhmmss[len - 1 - k] + ':' +  formatted;
+      } else {
+        formatted = hhmmss[len - 1 - k] + formatted;
+      }
     }
 
-    return timecodeCharactersFormatted.reverse().join('');
+    return formatted.length == 2 ? '0:' + formatted : formatted;
   };
 }));
